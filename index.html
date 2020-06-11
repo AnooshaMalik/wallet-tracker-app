@@ -9,7 +9,56 @@
 </head>
 
 <body>
-    <h1>Wallet Tracker App</h1>
+    <div class="container">
+        <div class="signinFormArea flex">
+            <form class="signinForm ">
+                <h1>Sign In FOrm</h1>
+                <input class="signinEmail" type="text" placeholder="Enter Email">
+                <input class="signinPassword" type="text" placeholder="Enter Password">
+                <button type="submit"> Submit</button>
+            </form>
+        </div>
+        <div class="signupFormArea flex">
+            <form class="signupForm ">
+                <h1>Sign up FOrm</h1>
+                <input class="signupFullName" type="text" placeholder="Enter Full Name">
+                <input class="signupEmail" type="text" placeholder="Enter Email">
+                <input class="signupPassword" type="text" placeholder="Enter Password">
+                <button type="submit"> Submit</button>
+            </form>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCzTzYJMEopk-lZITinnbsDNYUWHcAmL-0",
+            authDomain: "wallet-tracker-ff5de.firebaseapp.com",
+            databaseURL: "https://wallet-tracker-ff5de.firebaseio.com",
+            projectId: "wallet-tracker-ff5de",
+            storageBucket: "wallet-tracker-ff5de.appspot.com",
+            messagingSenderId: "309701464625",
+            appId: "1:309701464625:web:6e28f15f626b948fccfb10",
+            measurementId: "G-0JQVX0850T"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
     <script src="./JS/node.js"></script>
 </body>
 
