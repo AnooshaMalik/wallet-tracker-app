@@ -1,10 +1,43 @@
 // console.log('connected');
-console.log(firebase);
+// console.log(firebase);
 var auth = firebase.auth();
 var firestore = firebase.firestore();
 
 var signinForm = document.querySelector('.signinForm');
 var signupForm = document.querySelector('.signupForm');
+var googleBtn = document.querySelector('.googleBtn');
+
+// signIn With GoogleAccount Method
+
+var googleSignIn = async() => {
+    try {
+        var googleProvider = new firebase.auth.GoogleAuthProvider();
+        var { additionalUserInfo: { isNewUser }, user: { displayName, uid, email } } = await firebase.auth().signInWithPopup(googleProvider);
+        // console.log(loggedUser);
+    } catch (error) {
+        console.log(error.message);
+    }
+    if (isNewUser) {
+        // store Data in firestore through user uid 
+        var userInfo = {
+            fullName: displayName,
+            email,
+            createdAt: new Date()
+        }
+        console.log(userInfo);
+        await firestore.collection("users").doc(uid).set(userInfo);
+        console.log('done');
+        //redirect to dashbaord
+        location.assign(`./dashboard.html#${uid}`);
+    } else {
+        console.log('welcome');
+        //redirect to dashbaord
+        location.assign(`./dashboard.html#${uid}`);
+    }
+}
+
+
+googleBtn.addEventListener('click', googleSignIn);
 
 
 
@@ -23,6 +56,8 @@ var signinFormSubmission = async(e) => {
             var fetchUser = await firestore.collection("users").doc(uid).get();
             console.log(fetchUser.data());
             console.log('done');
+            //redirect to dashbaord
+            location.assign(`./dashboard.html#${uid}`);
         } catch (error) {
             console.log(error.message);
         }
@@ -39,7 +74,8 @@ var signupFormSubmission = async(e) => {
                 //create user in auth section
                 var { user: { uid } } = await auth.createUserWithEmailAndPassword(email, password);
                 console.log(uid);
-
+                //redirect to dashbaord
+                location.assign(`./dashboard.html#${uid}`);
             }
         } catch (error) {
             console.log(error.message);
