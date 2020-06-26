@@ -10,6 +10,62 @@
 <body>
     <h1>Hello</h1>
 
+    <div class="transactionForm flex">
+
+        <form class="transactionFormAll">
+            <input type="text" placeholder="Title" class="title">
+            <input type="text" placeholder="cost" class="cost">
+            <select class="select">
+               <option selected="hyjskl" value="Expense">Expanse</option>
+                <option value="Income">Income</option>
+
+            </select>
+            <input type="date" name="" id="" class="transactionAt">
+            <button class="transactionAddBtn" type="submit">Edit</button>
+
+        </form>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ---------------------------------------------------------------------------------------------- -->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCzTzYJMEopk-lZITinnbsDNYUWHcAmL-0",
+            authDomain: "wallet-tracker-ff5de.firebaseapp.com",
+            databaseURL: "https://wallet-tracker-ff5de.firebaseio.com",
+            projectId: "wallet-tracker-ff5de",
+            storageBucket: "wallet-tracker-ff5de.appspot.com",
+            messagingSenderId: "309701464625",
+            appId: "1:309701464625:web:6e28f15f626b948fccfb10",
+            measurementId: "G-0JQVX0850T"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+    <!-- ---------------------------------------------------------------------------------------------- -->
+    <script src="/JS/transaction.js"></script>
+
 </body>
 
 </html>
