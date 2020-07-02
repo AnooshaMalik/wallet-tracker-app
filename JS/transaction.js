@@ -1,3 +1,4 @@
+console.log('connected');
 var auth = firebase.auth();
 var firestore = firebase.firestore();
 var transactionForm = document.querySelector('.transactionForm');
@@ -12,31 +13,42 @@ var TransactionId = location.hash.substring(1, location.hash.length);
 
 var fetchTransaction = async(TransactionId) => {
 
+        try {
+            var transactionData = await firestore.collection('transactions').doc(TransactionId).get();
+            // console.log(transactions.data())
+            return (transactionData.data());
+        } catch (error) {
+            console.log(error.message)
+        }
 
-        var transactionData = await firestore.collection('transactions').doc(TransactionId).get();
-        // console.log(transactions.data())
-        return (transactionData.data());
     }
     // ----------------------------------------------------------------------------------------
 
 //        updateFunction                                     function# 02
 var editFormHandler = async(e, TransactionId) => {
-        e.preventDefault
-        var updatedTitle = transactionTitle.value;
-        var updatedCost = transactionCost.value;
-        var updatedSelect = transactionSelect.value;
-        var updatedTransactionAt = transactionAt.value;
-        var updatedTransaction = {
-            title: updatedTitle,
-            cost: updatedCost,
-            select: updatedSelect,
-            transactionAt: new Date(updatedTransactionAt)
-        }
-        console.log(updatedTransaction)
+        e.preventDefault();
+        try {
+            var updatedTitle = transactionTitle.value;
+            var updatedCost = transactionCost.value;
+            var updatedSelect = transactionSelect.value;
+            var updatedTransactionAt = transactionAt.value;
+            var updatedTransaction = {
+                title: updatedTitle,
+                cost: parseInt(updatedCost),
+                select: updatedSelect,
+                transactionAt: new Date(updatedTransactionAt)
+            }
+            await firestore.collection("transactions").doc(TransactionId).update(updatedTransaction);
+            location.assign("./dashboard.html");
+            // console.log(updatedTransaction)
             // console.log(updatedTitle, updatedCost, updatedSelect, updatedTransactionAt)
+        } catch (error) {
+            console.log(error.message)
+        }
+
     }
     // -- -- -- -- -- ---- -------------------------------------------------------------
-transactionForm.addEventListener("submit", (e) => editFormHandler(e))
+transactionForm.addEventListener("submit", (e) => editFormHandler(e, TransactionId))
 
 
 

@@ -6,6 +6,12 @@ var firestore = firebase.firestore();
 var signinForm = document.querySelector('.signinForm');
 var signupForm = document.querySelector('.signupForm');
 var googleBtn = document.querySelector('.googleBtn');
+var newUser = document.querySelector('.newUser');
+console.log(newUser);
+//
+var newPage = () => {
+    location.assign("./new.html");
+}
 
 // signIn With GoogleAccount Method
 

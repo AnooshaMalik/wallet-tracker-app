@@ -53,7 +53,7 @@ auth.onAuthStateChanged(async(user) => {
             //     transactionAt: "2020-10-3"
             // }, ];
             var transactions = await fetchTransactions(uid);
-            console.log(transactions);
+            // console.log(transactions);
             rendorTransactions(transactions);
 
             // await fetchTransactions(uid);
@@ -81,7 +81,7 @@ var transactionFormSubmission = async(e) => {
             if (title && cost && select && transactionAt) {
                 var transactionObj = {
                     title,
-                    cost,
+                    cost: parseInt(cost),
                     select,
                     transactionAt: new Date(transactionAt),
                     transactionBy: uid
@@ -112,10 +112,11 @@ var fetchTransactions = async(uid) => {
     }
     //------------------------- Rendor Tranctions----------------------------
 var rendorTransactions = (transactionArr) => {
-    transactionList.innerHTML = " ";
-    transactionArr.forEach((transactions, index) => {
-        var { title, cost, transactionAt, transactionId } = transactions;
-        transactionList.insertAdjacentHTML('beforeend', `   <div class="transactionListItem">
+        finalCostCalculation(transactionArr);
+        transactionList.innerHTML = " ";
+        transactionArr.forEach((transactions, index) => {
+            var { title, cost, transactionAt, transactionId } = transactions;
+            transactionList.insertAdjacentHTML('beforeend', `   <div class="transactionListItem">
         <div class="rendorIndex flex itemPadding">
             <h3>${++index}</h3>
         </div>
@@ -134,10 +135,27 @@ var rendorTransactions = (transactionArr) => {
 
     </div>`)
 
+        });
+
+
+    }
+    //                              setting the user curent amount
+var finalCostCalculation = (transArr) => {
+    var totalAmount = 0;
+    transArr.forEach((transaction) => {
+        var { cost, select } = transaction;
+        if (select === 'income') {
+            totalAmount = totalAmount + cost;
+        } else {
+            totalAmount = totalAmount - cost;
+
+        }
+
     });
-
-
+    console.log(totalAmount);
+    // console.log(transaction)
 }
+
 
 
 //-------------------------------------------------------------------------------
